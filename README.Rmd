@@ -1,30 +1,92 @@
 ---
-title: "STAT_report_question2"
-output: html_document
+output: 
+  pdf_document:
+  #stevetemplates::article2:
+  #  citation_package: natbib
+    dev: cairo_pdf
+    keep_tex: true
+biblio-style: apsr
+title: "Title of the semester project"
+graphics: yes
+author:
+- name: Student 1
+  affiliation: University of Geneva
+- name: Student 2
+  affiliation: University of Geneva
+- name: Student 3
+  affiliation: University of Geneva
+- name: Student 4
+  affiliation: University of Geneva
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+geometry: margin=1in
+#mainfont: cochineal
+#sansfont: Linux Biolinum O
+fontsize: 11pt
+# doublespacing: TRUE
+endnote: no
+# pandocparas: TRUE
+sansitup: FALSE
+bibliography: biblio.bib
+header-includes:
+  - \usepackage{longtable}
+  - \usepackage{hologo}
+  - \LTcapwidth=.95\textwidth
+  - \linespread{1.05}
+  - \usepackage{hyperref}
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+# `RMarkdown` basics
+
+This is a citations: @efron1992bootstrap.   
+
+
+This is a displayed but not evaluated `R` code chunk
+
+```{r, echo=TRUE, eval=FALSE}
+print("I love R")
 ```
 
-## R Markdown
+This is an `R` code chunk, not displayed but evaluated.
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r, fig.width=5, fig.height=4, fig.align='center', echo =F}
+data=rnorm(100)
+par(mfrow=c(2,1))
+par(mar=c(2,4,1,2))
+plot(density(data), main = "", ylab ="", xlab ="")
+boxplot(data, horizontal = T)
+par(mfrow=c(1,1))
+mean_data = mean(data)
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
+This is an inline `R` code: Hence, the mean of the data is of `r mean_data`.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+This is a \hologo{LaTeX} equation 
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+$$
+f(x)=\frac{1}{\sigma \sqrt{2 \pi}} \mathrm{e}^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^{2}}
+$$
 
-Hi, i'm using rmarkdown 
+This is a inline \hologo{LaTeX} equation: $\frac{1}{n} \sum_{i=1}^{n} a_{i}=\frac{a_{1}+a_{2}+\cdots+a_{n}}{n}$
+
+# Introduction
+
+La moyenne vaut `r round(mean_data,2)`
+
+# Analysis
+
+# Description of the task
+
+# Motivation
+
+# Results: description and interpretation
+
+# Were these results expected: discussion
+
+# Statistical methods used
+
+# Acquired skills during the term project
+
+# Additional element
+
+# Conclusion
