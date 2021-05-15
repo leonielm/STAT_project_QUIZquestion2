@@ -9,13 +9,11 @@ biblio-style: apsr
 title: "Title of the semester project"
 graphics: yes
 author:
-- name: Student 1
+- name: Thuy-My Ngo 
   affiliation: University of Geneva
-- name: Student 2
+- name: Doriane Pfister
   affiliation: University of Geneva
-- name: Student 3
-  affiliation: University of Geneva
-- name: Student 4
+- name: Léonie Lefebvre
   affiliation: University of Geneva
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 geometry: margin=1in
