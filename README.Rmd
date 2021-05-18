@@ -24,7 +24,7 @@ fontsize: 11pt
 endnote: no
 # pandocparas: TRUE
 sansitup: FALSE
-bibliography: biblio.bib
+bibliography: biblio.bib 
 header-includes:
   - \usepackage{longtable}
   - \usepackage{hologo}
