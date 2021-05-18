@@ -79,6 +79,14 @@ La moyenne vaut `r round(mean_data,2)`
 
 # Results: description and interpretation
 
+```{r fig.align = 'center', fig.cap = '**Eybrow 1** This is the population correlation with angle = 0'}
+plot(df, main=paste("Population correlation = ", round(rho, 3)))
+```
+
+```{r fig.align = 'center', fig.cap = '**Eybrow 1** This is the population correlation with angle = 0'}
+plot(df, main=paste("Population correlation = ", round(rho, 3)))
+```
+
 # Were these results expected: discussion
 
 # Statistical methods used
