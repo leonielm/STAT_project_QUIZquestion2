@@ -65,10 +65,6 @@ This is a citations: @efron1992bootstrap.
 
 This is a displayed but not evaluated `R` code chunk
 
-```{r, echo=TRUE, eval=FALSE}
-print("I love R")
-```
-
 This is an `R` code chunk, not displayed but evaluated.
 
 ```{r, fig.width=5, fig.height=4, fig.align='center', echo =F}
@@ -80,7 +76,6 @@ boxplot(data, horizontal = T)
 par(mfrow=c(1,1))
 mean_data = mean(data)
 ```
-
 
 This is an inline `R` code: Hence, the mean of the data is of `r mean_data`.
 
@@ -104,20 +99,24 @@ La moyenne vaut `r round(mean_data,2)`
 
 # Results: description and interpretation
 ```{r nonlinear_q1, echo=FALSE, fig.align = 'center',fig.cap = '**Eyebrow 1** This is the population correlation with angle = 0'}
+
+#Ex2 question 1 (a)
+#How does the angle parameter visually affect the data?
+#angle = 0 
+
 # Parameters:
 SAMPLESEED <- 9886
 SIMULATIONSEED <- 1021
-n <- 33
+n <- 500
 muX <- 0
 muY <- -1
 sX  <- 1.8
 sY  <- 0.5
-rho <- 0.66
+rho <- 0.84
 out <- 0.03
 dev <- 3
-angle <- -0.43
+angle <- 0
 
-n <- 500
 set.seed(SAMPLESEED)
 df <- gen_nonlinear(n=n, muX=muX, muY=muY, sX=sX, sY=sY, angle=pi)
 # population correlation in this setting 
@@ -126,6 +125,36 @@ rho <- cor_nonlinear(muX=muX, muY=muY, sX=sX, sY=sY, angle=angle)
 plot(df, main=paste("Population nonlinear correlation = ", round(rho, 3)))
 
 ```
+
+
+```{r nonlinear_q1, echo=FALSE, fig.align = 'center',fig.cap = '**Eyebrow 2** This is the population correlation with angle = -0.45'}
+
+#Ex2 question 1 (a)
+#How does the angle parameter visually affect the data?
+#angle = -0.45 
+
+# Parameters:
+SAMPLESEED <- 9886
+SIMULATIONSEED <- 1021
+n <- 500
+muX <- 0
+muY <- -1
+sX  <- 1.8
+sY  <- 0.5
+rho <- 0.84
+out <- 0.03
+dev <- 3
+angle <- -0.45
+
+set.seed(SAMPLESEED)
+df <- gen_nonlinear(n=n, muX=muX, muY=muY, sX=sX, sY=sY, angle=pi)
+# population correlation in this setting 
+rho <- cor_nonlinear(muX=muX, muY=muY, sX=sX, sY=sY, angle=angle)
+
+plot(df, main=paste("Population nonlinear correlation = ", round(rho, 3)))
+
+```
+
 
 # Were these results expected: discussion
 
