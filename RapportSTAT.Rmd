@@ -32,6 +32,31 @@ header-includes:
   - \linespread{1.05}
   - \usepackage{hyperref}
 ---
+```{r functions, echo=FALSE}
+# Generate Bivariate Data with Nonlinear Relationship
+gen_nonlinear <- function(n, muX, muY, sX, sY, angle){
+  rotmat <- matrix(c(cos(angle), -sin(angle), sin(angle), cos(angle)),2,2)
+  x <- rnorm(n, muX, sX)
+  y <- x**2 + rnorm(n, muY, sY)
+  df <- cbind(x,y)
+  df <- df %*% rotmat
+  df <- as.data.frame(df)
+  names(df) <- c("x", "y")
+  return(df)
+}
+
+# True correlation value for the nonlinear setting
+cor_nonlinear <- function(muX, muY, sX, sY, angle){
+  # muX and muY have no effect
+  sQ <- sqrt(cos(angle)**2 * (2*sX**4 + 4*sX**2*muX**2 +  sY**2) + sin(angle)**2 * sX**2 + 2 * cos(angle)*sin(angle)*(2*sX**2*muX))
+  sR <- sqrt(sin(angle)**2 * (2*sX**4 + 4*sX**2*muX**2 + sY**2) + cos(angle)**2 * sX**2 - 2 * cos(angle)*sin(angle)*(2*sX**2*muX))
+  cov <- sin(angle)*cos(angle) * (sX**2 - (2*sX**4 + 4*sX**2*muX**2 + sY**2)) +
+    (cos(angle)**2 - sin(angle)**2) * (2*sX**2*muX)
+  cor <- round(cov/(sQ*sR), 4)
+  return(cor)
+}
+
+```
 
 # `RMarkdown` basics
 
@@ -78,13 +103,28 @@ La moyenne vaut `r round(mean_data,2)`
 # Motivation
 
 # Results: description and interpretation
+```{r nonlinear_q1, echo=FALSE, fig.align = 'center',fig.cap = '**Eyebrow 1** This is the population correlation with angle = 0'}
+# Parameters:
+SAMPLESEED <- 9886
+SIMULATIONSEED <- 1021
+n <- 33
+muX <- 0
+muY <- -1
+sX  <- 1.8
+sY  <- 0.5
+rho <- 0.66
+out <- 0.03
+dev <- 3
+angle <- -0.43
 
-```{r fig.align = 'center', fig.cap = '**Eybrow 1** This is the population correlation with angle = 0'}
-plot(df, main=paste("Population correlation = ", round(rho, 3)))
-```
+n <- 500
+set.seed(SAMPLESEED)
+df <- gen_nonlinear(n=n, muX=muX, muY=muY, sX=sX, sY=sY, angle=pi)
+# population correlation in this setting 
+rho <- cor_nonlinear(muX=muX, muY=muY, sX=sX, sY=sY, angle=angle)
 
-```{r fig.align = 'center', fig.cap = '**Eybrow 1** This is the population correlation with angle = 0'}
-plot(df, main=paste("Population correlation = ", round(rho, 3)))
+plot(df, main=paste("Population nonlinear correlation = ", round(rho, 3)))
+
 ```
 
 # Were these results expected: discussion
