@@ -1,0 +1,132 @@
+---
+output: 
+  pdf_document:
+  #stevetemplates::article2:
+  #  citation_package: natbib
+    dev: cairo_pdf
+    keep_tex: true
+biblio-style: apsr
+title: "Title of the semester project"
+graphics: yes
+author:
+- name: Thuy-My Ngo 
+  affiliation: University of Geneva
+- name: Doriane Pfister
+  affiliation: University of Geneva
+- name: Léonie Lefebvre
+  affiliation: University of Geneva
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+geometry: margin=1in
+#mainfont: cochineal
+#sansfont: Linux Biolinum O
+fontsize: 11pt
+# doublespacing: TRUE
+endnote: no
+# pandocparas: TRUE
+sansitup: FALSE
+bibliography: biblio.bib 
+header-includes:
+  - \usepackage{longtable}
+  - \usepackage{hologo}
+  - \LTcapwidth=.95\textwidth
+  - \linespread{1.05}
+  - \usepackage{hyperref}
+---
+
+
+```{r functions, echo=FALSE}
+# Generate Bivariate Data with Nonlinear Relationship
+gen_nonlinear <- function(n, muX, muY, sX, sY, angle){
+  rotmat <- matrix(c(cos(angle), -sin(angle), sin(angle), cos(angle)),2,2)
+  x <- rnorm(n, muX, sX)
+  y <- x**2 + rnorm(n, muY, sY)
+  df <- cbind(x,y)
+  df <- df %*% rotmat
+  df <- as.data.frame(df)
+  names(df) <- c("x", "y")
+  return(df)
+}
+
+# True correlation value for the nonlinear setting
+cor_nonlinear <- function(muX, muY, sX, sY, angle){
+  # muX and muY have no effect
+  sQ <- sqrt(cos(angle)**2 * (2*sX**4 + 4*sX**2*muX**2 +  sY**2) + sin(angle)**2 * sX**2 + 2 * cos(angle)*sin(angle)*(2*sX**2*muX))
+  sR <- sqrt(sin(angle)**2 * (2*sX**4 + 4*sX**2*muX**2 + sY**2) + cos(angle)**2 * sX**2 - 2 * cos(angle)*sin(angle)*(2*sX**2*muX))
+  cov <- sin(angle)*cos(angle) * (sX**2 - (2*sX**4 + 4*sX**2*muX**2 + sY**2)) +
+    (cos(angle)**2 - sin(angle)**2) * (2*sX**2*muX)
+  cor <- round(cov/(sQ*sR), 4)
+  return(cor)
+}
+
+```
+
+
+# `RMarkdown` basics
+
+This is a citations: @efron1992bootstrap.   
+
+
+This is a displayed but not evaluated `R` code chunk
+
+```{r chunck1, echo=FALSE, eval=FALSE}
+print("I love R")
+```
+
+This is an `R` code chunk, not displayed but evaluated.
+
+This is an inline `R` code: Hence, the mean of the data is of `r mean_data`.
+
+This is a \hologo{LaTeX} equation 
+
+$$
+f(x)=\frac{1}{\sigma \sqrt{2 \pi}} \mathrm{e}^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^{2}}
+$$
+
+This is a inline \hologo{LaTeX} equation: $\frac{1}{n} \sum_{i=1}^{n} a_{i}=\frac{a_{1}+a_{2}+\cdots+a_{n}}{n}$
+
+# Introduction
+
+La moyenne vaut `r round(mean_data,2)`
+
+# Analysis
+
+# Description of the task
+
+# Motivation
+
+# Results: description and interpretation
+
+```{r nonlinear_q1, echo=FALSE, fig.align = 'center',fig.cap = '**Eyebrow 1** This is the population correlation with angle = 0'}
+# Parameters:
+SAMPLESEED <- 9886
+SIMULATIONSEED <- 1021
+n <- 33
+muX <- 0
+muY <- -1
+sX  <- 1.8
+sY  <- 0.5
+rho <- 0.66
+out <- 0.03
+dev <- 3
+angle <- -0.43
+
+n <- 500
+set.seed(SAMPLESEED)
+df <- gen_nonlinear(n=n, muX=muX, muY=muY, sX=sX, sY=sY, angle=pi)
+# population correlation in this setting 
+rho <- cor_nonlinear(muX=muX, muY=muY, sX=sX, sY=sY, angle=angle)
+
+plot(df, main=paste("Population nonlinear correlation = ", round(rho, 3)))
+
+```
+
+
+# Were these results expected: discussion
+
+# Statistical methods used
+
+# Acquired skills during the term project
+
+# Additional element
+
+# Conclusion
