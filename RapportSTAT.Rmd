@@ -1,5 +1,5 @@
 ---
-title: "Title of the semester project"
+title: "Title of project"
 author:
 - affiliation: University of Geneva
   name: Thuy-My Ngo
@@ -74,7 +74,7 @@ The types of confidence intervals used are the parametric bootstrap CI of level 
 We decided to take part in this scientific report as we wanted to apply the numerous theoretical theories seen in the course provided by Profesor Victoria-Feser. We also saw this project as an opportunity to meet new people and experience the workgroup process, as we can combine our knowledge and perspective on the matter while being able to discuss within a group. 
 
 # Analysis
-```{r nonlinear_q1, echo=FALSE, fig.align = 'center',fig.cap = 'Hammock, this is the population correlation with angle = 0'}
+```{r nonlinear_q1, echo=FALSE, fig.align = 'center', fig.show="hold", out.width="50%", fig.cap = 'Hammock, this is the population correlation with angle = 0'}
 
 #Ex2 question 1
 #angle = 0 
@@ -102,7 +102,7 @@ plot(df, main=paste("Population nonlinear correlation = ", round(rho, 3)))
 ```
 
 
-```{r nonlinear_q2, echo=FALSE, fig.align = 'center',fig.cap = 'Comet, this is the population correlation with angle = -0.45'}
+```{r nonlinear_q2, echo=FALSE, fig.align = 'center', fig.show="hold", out.width="50%", fig.cap = 'Comet, this is the population correlation with angle = -0.45'}
 
 #Ex2 question 1 
 #angle = -0.45 
