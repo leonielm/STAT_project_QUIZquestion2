@@ -1,5 +1,5 @@
 ---
-title: "Title of project"
+title: "Statistics : Correlation coefficient "
 author:
 - affiliation: University of Geneva
   name: Thuy-My Ngo
