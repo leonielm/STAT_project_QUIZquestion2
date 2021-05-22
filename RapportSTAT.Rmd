@@ -1,5 +1,5 @@
 ---
-title: "Statistics : Correlation coefficient "
+title: 'Statistics : Correlation coefficient '
 author:
 - affiliation: University of Geneva
   name: Thuy-My Ngo
@@ -9,6 +9,7 @@ author:
   name: Léonie Lefebvre
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output:
+  word_document: default
   pdf_document:
     dev: cairo_pdf
     keep_tex: yes
@@ -28,6 +29,8 @@ bibliography: biblio.bib
 sansitup: no
 biblio-style: apsr
 ---
+
+
 ```{r functions, echo=FALSE}
 # Generate Bivariate Data with Nonlinear Relationship
 gen_nonlinear <- function(n, muX, muY, sX, sY, angle){
@@ -135,9 +138,17 @@ Here we see the two scatterplots of when the data is generated with angle = 0 (H
 
 Hammock describes a positive relationship between X and Y as the graph shows a convex parabola (x^2). As we generate the data with an angle parameter of -0.45, we see that there is a rotation to the left. Thus, we deduce that the angle does visually affect the data, in that it imposes a rotation. 
 
-Furthermore, when the angle moves from $-/pi$ to $+/pi$, we observe a complete rotation of the parabola. 
+Furthermore, when the angle moves from $-\pi$ to $+\pi$, we observe a complete rotation of the parabola. 
 
 # Results and discussion: description and interpretation of the results
+
+| | |  Normal PDF| with outliers| Discrete PDF|  Nonlinear PDF|
+|:---------------|:---------|-----------:|-----------:|-----------:|-----------:|
+|parametric boot |n = 33 | 0.771| 0.639| 0.776| 0.681|
+| |n = 110 | 0.783| 0.257| 0.776| 0.63|
+|non-parametric boot |n = 33 | 0.758| 0.758| 0.753| 0.725|
+| |n = 110 | 0.773| 0.431| 0.769| 0.723|
+
 The parametric bootstrap, as it is implemented, assumes that the random variables are bivariate normal. 
 
 How does it affect its performance, in terms of coverage, in the different data settings? 
@@ -162,8 +173,12 @@ In real life, we can imagine that the Spearman method would be used to see wheth
 # Acquired skills during the term project
 By accomplishing this report, we had an opportunity to broaden the use of the R language by computing various aspects of the topics seen in class. Despite a short learning period time, we are now able to compute various functions on R and interpret codes. Furthermore, learning to code has opened new perspectives as well as revealed numerous ways of interpreting datasets. We will be able to apply these perspectives to diverse daily socio-political situations. For these reasons, the present report benefitted us greatly to acquire skills that will make our International Relations studies more valuable. 
 
-# Additional element
-
 # Conclusion
 In conclusion, in the Nonlinear Relationship Study, we see that the angle parameter does affect the data by imposing a rotation, displacing the parabola. 
 As for the Confidence Interval Coverage Study, the Confidence Interval of type npboot and of type boot results in different outcomes depending on the setting and the sample size. Overall, most of the outcomes are close to the confidence interval with a level = 0.8, as one would expect.
+
+<iframe src="https://giphy.com/embed/11sBLVxNs7v6WA" width="480" height="217" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/cheer-cheering-11sBLVxNs7v6WA">via GIPHY</a></p>
+
+### You can scan the QR code with you mobile phone for a refreshing surprise!
+
+

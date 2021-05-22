@@ -29,11 +29,14 @@
 }
 \usepackage{hyperref}
 \hypersetup{
-            pdftitle={Title of project},
+            pdftitle={Statistics : Correlation coefficient},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
 \usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs}
+% Fix footnotes in tables (requires footnote package)
+\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -68,9 +71,9 @@
 \linespread{1.05}
 \usepackage{hyperref}
 
-\title{Title of project}
+\title{Statistics : Correlation coefficient}
 \author{true \and true \and true}
-\date{May 22, 2021}
+\date{May 23, 2021}
 
 \begin{document}
 \maketitle
@@ -155,12 +158,26 @@ parameter of -0.45, we see that there is a rotation to the left. Thus,
 we deduce that the angle does visually affect the data, in that it
 imposes a rotation.
 
-Furthermore, when the angle moves from \(-/pi\) to \(+/pi\), we observe
+Furthermore, when the angle moves from \(-\pi\) to \(+\pi\), we observe
 a complete rotation of the parabola.
 
 \hypertarget{results-and-discussion-description-and-interpretation-of-the-results}{%
 \section{Results and discussion: description and interpretation of the
 results}\label{results-and-discussion-description-and-interpretation-of-the-results}}
+
+\begin{longtable}[]{@{}llrrrr@{}}
+\toprule
+& & Normal PDF & with outliers & Discrete PDF & Nonlinear
+PDF\tabularnewline
+\midrule
+\endhead
+parametric boot & n = 33 & 0.771 & 0.639 & 0.776 & 0.681\tabularnewline
+& n = 110 & 0.783 & 0.257 & 0.776 & 0.63\tabularnewline
+non-parametric boot & n = 33 & 0.758 & 0.758 & 0.753 &
+0.725\tabularnewline
+& n = 110 & 0.773 & 0.431 & 0.769 & 0.723\tabularnewline
+\bottomrule
+\end{longtable}
 
 The parametric bootstrap, as it is implemented, assumes that the random
 variables are bivariate normal.
@@ -231,9 +248,6 @@ diverse daily socio-political situations. For these reasons, the present
 report benefitted us greatly to acquire skills that will make our
 International Relations studies more valuable.
 
-\hypertarget{additional-element}{%
-\section{Additional element}\label{additional-element}}
-
 \hypertarget{conclusion}{%
 \section{Conclusion}\label{conclusion}}
 
@@ -244,5 +258,12 @@ Confidence Interval of type npboot and of type boot results in different
 outcomes depending on the setting and the sample size. Overall, most of
 the outcomes are close to the confidence interval with a level = 0.8, as
 one would expect.
+
+via GIPHY
+
+\hypertarget{you-can-scan-the-qr-code-with-you-mobile-phone-for-a-refreshing-surprise}{%
+\subsubsection{You can scan the QR code with you mobile phone for a
+refreshing
+surprise!}\label{you-can-scan-the-qr-code-with-you-mobile-phone-for-a-refreshing-surprise}}
 
 \end{document}
