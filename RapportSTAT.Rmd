@@ -1,36 +1,32 @@
 ---
-output: 
-  pdf_document:
-  #stevetemplates::article2:
-  #  citation_package: natbib
-    dev: cairo_pdf
-    keep_tex: true
-biblio-style: apsr
 title: "Title of the semester project"
-graphics: yes
 author:
-- name: Thuy-My Ngo 
-  affiliation: University of Geneva
-- name: Doriane Pfister
-  affiliation: University of Geneva
-- name: Léonie Lefebvre
-  affiliation: University of Geneva
+- affiliation: University of Geneva
+  name: Thuy-My Ngo
+- affiliation: University of Geneva
+  name: Doriane Pfister
+- affiliation: University of Geneva
+  name: Léonie Lefebvre
 date: "`r format(Sys.time(), '%B %d, %Y')`"
-geometry: margin=1in
-#mainfont: cochineal
-#sansfont: Linux Biolinum O
-fontsize: 11pt
-# doublespacing: TRUE
+output:
+  pdf_document:
+    dev: cairo_pdf
+    keep_tex: yes
+  html_document:
+    df_print: paged
 endnote: no
-# pandocparas: TRUE
-sansitup: FALSE
-bibliography: biblio.bib 
+fontsize: 11pt
+geometry: margin=1in
+graphics: yes
 header-includes:
-  - \usepackage{longtable}
-  - \usepackage{hologo}
-  - \LTcapwidth=.95\textwidth
-  - \linespread{1.05}
-  - \usepackage{hyperref}
+- \usepackage{longtable}
+- \usepackage{hologo}
+- \LTcapwidth=.95\textwidth
+- \linespread{1.05}
+- \usepackage{hyperref}
+bibliography: biblio.bib
+sansitup: no
+biblio-style: apsr
 ---
 ```{r functions, echo=FALSE}
 # Generate Bivariate Data with Nonlinear Relationship
@@ -78,10 +74,9 @@ The types of confidence intervals used are the parametric bootstrap CI of level 
 We decided to take part in this scientific report as we wanted to apply the numerous theoretical theories seen in the course provided by Profesor Victoria-Feser. We also saw this project as an opportunity to meet new people and experience the workgroup process, as we can combine our knowledge and perspective on the matter while being able to discuss within a group. 
 
 # Analysis
-```{r nonlinear_q1, echo=FALSE, fig.align = 'center',fig.cap = '**Hammock** This is the population correlation with angle = 0'}
+```{r nonlinear_q1, echo=FALSE, fig.align = 'center',fig.cap = 'Hammock, this is the population correlation with angle = 0'}
 
-#Ex2 question 1 (a)
-#How does the angle parameter visually affect the data?
+#Ex2 question 1
 #angle = 0 
 
 # Parameters:
@@ -107,10 +102,9 @@ plot(df, main=paste("Population nonlinear correlation = ", round(rho, 3)))
 ```
 
 
-```{r nonlinear_q1, echo=FALSE, fig.align = 'center',fig.cap = '**Comet** This is the population correlation with angle = -0.45'}
+```{r nonlinear_q2, echo=FALSE, fig.align = 'center',fig.cap = 'Comet, this is the population correlation with angle = -0.45'}
 
-#Ex2 question 1 (a)
-#How does the angle parameter visually affect the data?
+#Ex2 question 1 
 #angle = -0.45 
 
 # Parameters:
@@ -134,11 +128,14 @@ rho <- cor_nonlinear(muX=muX, muY=muY, sX=sX, sY=sY, angle=angle)
 plot(df, main=paste("Population nonlinear correlation = ", round(rho, 3)))
 
 ```
+
+
+
 Here we see the two scatterplots of when the data is generated with angle = 0 (Hammock), and when it is generated with angle = -0.45 (Comet) from the samples from a PDF of (X, Y), where (X,Y) have a nonlinear relationship. 
 
 Hammock describes a positive relationship between X and Y as the graph shows a convex parabola (x^2). As we generate the data with an angle parameter of -0.45, we see that there is a rotation to the left. Thus, we deduce that the angle does visually affect the data, in that it imposes a rotation. 
 
-Furthermore, when the angle moves from -π to +π, we observe a complete rotation of the parabola. 
+Furthermore, when the angle moves from $-/pi$ to $+/pi$, we observe a complete rotation of the parabola. 
 
 # Results and discussion: description and interpretation of the results
 The parametric bootstrap, as it is implemented, assumes that the random variables are bivariate normal. 
@@ -156,10 +153,17 @@ We observe that the boot type parameter works the best when applied on a normal 
 Then with the outliers setting, we see that as the n is larger, the number of outliers increases, thus making the result further than the confidence interval. The most surprising part of the table, is that the difference between the outliers setting when n = 33 and when n = 110, using the parametric boot type is quite large compared to when the data is performed with the nonparametric boot type. 
 
 # Statistical methods used
+The Pearson method is used to calculate a correlation coefficient that describes the strength relationship between two variables, in our case X and Y, which ranges from 0 to 1. The closer the correlation coefficient is to 0, the more the variables are independent from each other. When equal to 1, the variables are equal to each other. 
+The Pearson method can be used on empirical observations in daily life. For instance, if we want to evaluate whether there is a positive or negative relationship between a student’s age and their level of income when working at Starbucks.
+
+The Spearman rank correlation method is the nonparametric version of the Pearson correlation coefficient method (“Lund Research Ltd”, 2018). It is distinct in that the Spearman correlation coefficient is used to determine the strength of a monotonic relationship, which is a type of function that only increases or only decreases. 
+In real life, we can imagine that the Spearman method would be used to see whether an Unige exam performance in Statistics is associated with the time students spent studying in the UniMail library.
 
 # Acquired skills during the term project
-By accomplishing this report, we had an opportunity to broaden the use of the R language by computing various aspects of the topics seen in class. In a short period time, we are now able to compute various functions on R and interpret codes. Furthermore, learning to code has opened new perspectives as well as revealed numerous ways of interpreting datasets. We will be able to apply these perspectives to diverse daily socio-political situations. For these reasons, the present report benefitted us greatly to acquire skills that will make our International Relations studies more valuable. 
+By accomplishing this report, we had an opportunity to broaden the use of the R language by computing various aspects of the topics seen in class. Despite a short learning period time, we are now able to compute various functions on R and interpret codes. Furthermore, learning to code has opened new perspectives as well as revealed numerous ways of interpreting datasets. We will be able to apply these perspectives to diverse daily socio-political situations. For these reasons, the present report benefitted us greatly to acquire skills that will make our International Relations studies more valuable. 
 
 # Additional element
 
 # Conclusion
+In conclusion, in the Nonlinear Relationship Study, we see that the angle parameter does affect the data by imposing a rotation, displacing the parabola. 
+As for the Confidence Interval Coverage Study, the Confidence Interval of type npboot and of type boot results in different outcomes depending on the setting and the sample size. Overall, most of the outcomes are close to the confidence interval with a level = 0.8, as one would expect.
