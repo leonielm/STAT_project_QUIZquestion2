@@ -29,14 +29,12 @@
 }
 \usepackage{hyperref}
 \hypersetup{
-            pdftitle={Statistics : Correlation coefficient},
+            pdftitle={Comparing correlation coefficient methods with R : Is there really a relationship between Statistics and Timothee ?},
+            pdfauthor={Thuy-My Ngo; Doriane Pfister; Léonie Lefebvre},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
 \usepackage[margin=1in]{geometry}
-\usepackage{longtable,booktabs}
-% Fix footnotes in tables (requires footnote package)
-\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -70,9 +68,24 @@
 \LTcapwidth=.95\textwidth
 \linespread{1.05}
 \usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
 
-\title{Statistics : Correlation coefficient}
-\author{true \and true \and true}
+\title{Comparing correlation coefficient methods with R : Is there really a
+relationship between Statistics and Timothee ?}
+\author{Thuy-My Ngo\footnote{University of Geneva, ID 20-312-468} \and Doriane Pfister\footnote{University of Geneva, ID 20-325-122} \and Léonie Lefebvre\footnote{University of Geneva, ID 20-302-063}}
 \date{May 23, 2021}
 
 \begin{document}
@@ -81,40 +94,39 @@
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
-As an apogee of the introduction to statistics course and top off the
-final moments of being a first year undergraduate in International
-Relations, this project reflects all the knowledge acquired throughout
-the past few months of this introductory class. Beginning with no
-history in programming nor experience in writing a scientific report on
-Rmarkdown, we were able to learn and develop step by step, our insight
-on the `magic' of Data Analytics.
+As an apogee of the introduction to statistics course and our final
+moments of being a first year undergraduate in International Relations,
+this project reflects all the knowledge acquired throughout the past few
+months attending this introductory class. Beginning with no history in
+programming nor experience in writing a scientific report on Rmarkdown,
+we were able to learn and develop step by step, our insight on the
+`magic' of Data Analytics.
 
 We are grateful to have had the chance to receive a rather large glance
-at basic R commands and to put into practice the notions seen during the
-classes. Now, we are pleased to lead you through the outcome resulting
+at basic R commands and to put into practice the notions seen during
+classe. Today, we are pleased to lead you through the outcome resulting
 from our small but still progressing abilities in statistics.
 
 \hypertarget{description-of-the-task}{%
 \section{Description of the task}\label{description-of-the-task}}
 
-In question 1 of exercise 2, our topic is related to bias study, non
-linear relationship. We are asked to draw samples from a PDF for (X,Y),
-where (X, Y) have a nonlinear relationship, using the function
+In question 1 of exercise 2, our topic is related to bias study,
+nonlinear relationship. We are asked to draw samples from a PDF for
+(X,Y), where (X, Y) have a nonlinear relationship, using the function
 gen\_nonlinear. Using the parameters assigned to us as well as an angle
 parameter, we had to explain how the angle parameter visually affect the
-data by comparing two scatterplots, one when the data is generated with
-angle = 0, and the other when the data is generated with angle = -0.45.
+data by comparing two scatterplots. The first generated with angle = 0,
+and the second generated with angle = -0.45.
 
 In question 2 of the same exercise, we study the Confidence Interval
 Coverage. We are given the task to study the coverage of different
-confidence intervals (CIs) for Px,y, in the following data settings: 1.
-the PDF of (X,Y) is a bivariate normal PDF 2. the PDF of (X,Y) is a
+confidence intervals (CIs) for Px,y, with the following data settings:
+1. the PDF of (X,Y) is a bivariate normal PDF 2. the PDF of (X,Y) is a
 bivariate normal PDF, but the observed sample contains outliers 3. the
 PDF of (X,Y) is a discrete PDF 4. X and Y have a nonlinear relationship
 
 The types of confidence intervals used are the parametric bootstrap CI
-of level = 0.8 and the nonparametric bootstrap CI of level = 0.8. We
-used
+of level = 0.8 and the non-parametric bootstrap CI of level = 0.8.
 
 \hypertarget{motivation}{%
 \section{Motivation}\label{motivation}}
@@ -122,9 +134,9 @@ used
 We decided to take part in this scientific report as we wanted to apply
 the numerous theoretical theories seen in the course provided by
 Profesor Victoria-Feser. We also saw this project as an opportunity to
-meet new people and experience the workgroup process, as we can combine
-our knowledge and perspective on the matter while being able to discuss
-within a group.
+meet new people and experience the workgroup process, as we combine our
+knowledge and perspectives on the matter, while being able to discuss
+them within a group.
 
 \hypertarget{analysis}{%
 \section{Analysis}\label{analysis}}
@@ -158,112 +170,148 @@ parameter of -0.45, we see that there is a rotation to the left. Thus,
 we deduce that the angle does visually affect the data, in that it
 imposes a rotation.
 
-Furthermore, when the angle moves from \(-\pi\) to \(+\pi\), we observe
+Furthermore, when the angle moves from \(-\pi\) to \(+\pi\), we observed
 a complete rotation of the parabola.
 
 \hypertarget{results-and-discussion-description-and-interpretation-of-the-results}{%
 \section{Results and discussion: description and interpretation of the
 results}\label{results-and-discussion-description-and-interpretation-of-the-results}}
 
-\begin{longtable}[]{@{}llrrrr@{}}
-\toprule
-& & Normal PDF & with outliers & Discrete PDF & Nonlinear
-PDF\tabularnewline
-\midrule
-\endhead
-parametric boot & n = 33 & 0.771 & 0.639 & 0.776 & 0.681\tabularnewline
-& n = 110 & 0.783 & 0.257 & 0.776 & 0.63\tabularnewline
-non-parametric boot & n = 33 & 0.758 & 0.758 & 0.753 &
-0.725\tabularnewline
-& n = 110 & 0.773 & 0.431 & 0.769 & 0.723\tabularnewline
-\bottomrule
-\end{longtable}
+\begin{table}
+\centering
+\begin{tabular}{l|r|>{}r|>{}r|r|>{}r}
+\hline
+Boot Type & Sample Size & Normal PDF & With outliers & Discrete & Non Linear\\
+\hline
+ & 33 & \textcolor{green}{0.771} & \textcolor{black}{0.639} & 0.776 & \textcolor{blue}{0.681}\\
+\cline{2-6}
+\multirow[t]{-2}{*}{\raggedright\arraybackslash Parametic} & 110 & \textcolor{green}{\textbf{0.783}} & \textcolor{orange}{0.257} & 0.776 & \textcolor{blue}{0.630}\\
+\cline{1-6}
+ & 33 & \textcolor{black}{0.758} & \textcolor{black}{0.758} & 0.753 & \textcolor{red}{0.725}\\
+\cline{2-6}
+\multirow[t]{-2}{*}{\raggedright\arraybackslash Non-Parametric} & 110 & \textcolor{black}{0.773} & \textcolor{orange}{0.431} & 0.769 & \textcolor{red}{0.723}\\
+\hline
+\end{tabular}
+\end{table}
 
-The parametric bootstrap, as it is implemented, assumes that the random
-variables are bivariate normal.
+The following discussion will be based on the results displayed in the
+Table. The use of colors to refer to the data is employed for the
+reader's convenience.
 
-How does it affect its performance, in terms of coverage, in the
-different data settings? We observe a decrease in the interval
-confidence when the parametric boot is performed on non parametric
-functions such as the discrete and nonlinear, as seen in the blue data
+We observe a decrease in the interval confidence when the parametric
+boot is performed on a non-parametric functions like the discrete and
+nonlinear ones (blue). Furthermore, we expect the non-parametric
+bootstrap to perform better on a discrete PDF, as it is not a parametric
+function.
 
-In what data setting do you expect the nonparametric bootstrap to
-perform better? We expect the nonparametric bootstrap to perform better
-on a discrete PDF, as it is not a parametric function.
-
-We assume from these obtained results, that the bivariate normal PDF
-worked the best at approaching the confidence interval. We can see that
-0.783 is the closest to 0.8, particularly when operating with the
-parametric boot type.
+We assumed, that the bivariate normal PDF worked the best at approaching
+the confidence interval. We can see that 0.783 (bold, green) is the
+closest to the 0.8, particularly when operating with the parametric boot
+type.
 
 We observe that the boot type parameter works the best when applied on a
-normal PDF, as displayed by the green data. As the boot type parameter
-is based on the mean and standard deviation, it is the most optimal
-approach to compute the normal PDF's confidence interval as the latter
-contains these two parameters. As for the non-parametric boot, it is the
-most optimal when applied on a no parameter function like the nonlinear
-function. It is displayed by the red data, which shows a greater
-confidence interval than the blue data, computed with a parametric boot.
+normal PDF (green data). As the boot type parameter is based on the mean
+and standard deviation, it is the most optimal approach to compute the
+normal PDF's confidence interval as the latter contains these two
+parameters. As for the non-parametric boot, it is the most optimal when
+applied on a no parameter function like the nonlinear function. It is
+displayed by the red data, which shows a greater confidence interval
+than the blue data, computed with a parametric boot.
 
 Then with the outliers setting, we see that as the n is larger, the
-number of outliers increases, thus making the result further than the
-confidence interval. The most surprising part of the table, is that the
-difference between the outliers setting when n = 33 and when n = 110,
-using the parametric boot type is quite large compared to when the data
-is performed with the nonparametric boot type.
+number of outliers increases (orange), thus making the result further
+than the confidence interval. The most surprising part of the table, is
+that the difference between the outliers setting when n = 33 and when n
+= 110, using the parametric boot type is quite large compared to when
+the data is performed with the non-parametric boot type.
 
 \hypertarget{statistical-methods-used}{%
 \section{Statistical methods used}\label{statistical-methods-used}}
 
 The Pearson method is used to calculate a correlation coefficient that
-describes the strength relationship between two variables, in our case X
-and Y, which ranges from 0 to 1. The closer the correlation coefficient
-is to 0, the more the variables are independent from each other. When
-equal to 1, the variables are equal to each other. The Pearson method
-can be used on empirical observations in daily life. For instance, if we
-want to evaluate whether there is a positive or negative relationship
-between a student's age and their level of income when working at
-Starbucks.
+describes the strength relationship between two variables (Kenton
+(2021)), in our case X and Y, which ranges from 0 to 1. The closer the
+correlation coefficient is to 0, the more the variables are independent
+from each other. When equal to 1, the variables are equal to each other.
+The Pearson method can be used on empirical observations in daily life
+(``A Comparison of the Pearson and Spearman Correlation Methods'' 2019).
+For instance, if we wanted to evaluate whether there is a positive or
+negative relationship between a student's age and their level of income
+when working at Starbucks.
 
-The Spearman rank correlation method is the nonparametric version of the
-Pearson correlation coefficient method (``Lund Research Ltd'', 2018). It
-is distinct in that the Spearman correlation coefficient is used to
-determine the strength of a monotonic relationship, which is a type of
-function that only increases or only decreases. In real life, we can
-imagine that the Spearman method would be used to see whether an Unige
-exam performance in Statistics is associated with the time students
-spent studying in the UniMail library.
+The Spearman rank correlation method is the non-parametric version of
+the Pearson correlation coefficient method (``Spearman's Rank-Order
+Correlation'' 2018). It is distinct in that the Spearman correlation
+coefficient is used to determine the strength of a monotonic
+relationship, which is a type of function that only increases or only
+decreases. In real life, we can imagine that the Spearman method would
+be used to see whether an Unige exam performance in Statistics is
+associated with the time students spent studying in the UniMail library.
 
 \hypertarget{acquired-skills-during-the-term-project}{%
 \section{Acquired skills during the term
 project}\label{acquired-skills-during-the-term-project}}
 
-By accomplishing this report, we had an opportunity to broaden the use
-of the R language by computing various aspects of the topics seen in
-class. Despite a short learning period time, we are now able to compute
-various functions on R and interpret codes. Furthermore, learning to
-code has opened new perspectives as well as revealed numerous ways of
-interpreting datasets. We will be able to apply these perspectives to
-diverse daily socio-political situations. For these reasons, the present
-report benefitted us greatly to acquire skills that will make our
-International Relations studies more valuable.
+By accomplishing this report, we had an opportunity to broaden our
+understanding of the R language by computing various aspects of the
+topics seen in class. Despite a short learning period time, we are now
+able to compute various functions on R and interpret R codes.
+Furthermore, learning to code has opened new perspectives as well as
+revealed numerous ways of interpreting datasets. We will be able to
+apply these perspectives to diverse daily socio-political situations.
+For these reasons, the present report benefitted us greatly to acquire
+skills that will make our International Relations studies more valuable.
 
 \hypertarget{conclusion}{%
 \section{Conclusion}\label{conclusion}}
 
 In conclusion, in the Nonlinear Relationship Study, we see that the
-angle parameter does affect the data by imposing a rotation, displacing
-the parabola. As for the Confidence Interval Coverage Study, the
-Confidence Interval of type npboot and of type boot results in different
-outcomes depending on the setting and the sample size. Overall, most of
-the outcomes are close to the confidence interval with a level = 0.8, as
-one would expect.
+angle parameter does affect the data by imposing a rotation, moving the
+parabola. As for the Confidence Interval Coverage Study, the Confidence
+Interval of non-parametric boot type and of parametric boot type,
+results in different outcomes depending on the setting and the sample
+size. Overall, most of the outcomes are close to the confidence interval
+with the highest value at 0.783 (bold, green), as one would expect.
 
-via GIPHY
+\begin{figure}
+\centering
+\includegraphics[width=0.4\textwidth,height=\textheight]{cheering_minions.png}
+\caption{Us three celebrating the finished report (``Giphy'' 2015)}
+\end{figure}
 
-\hypertarget{you-can-scan-the-qr-code-with-you-mobile-phone-for-a-refreshing-surprise}{%
-\subsubsection{You can scan the QR code with you mobile phone for a
+\hypertarget{use-your-mobile-phone-to-scan-the-qr-code-below-for-a-refreshing-surprise}{%
+\subsubsection{Use your mobile phone to scan the QR code below for a
 refreshing
-surprise!}\label{you-can-scan-the-qr-code-with-you-mobile-phone-for-a-refreshing-surprise}}
+surprise!}\label{use-your-mobile-phone-to-scan-the-qr-code-below-for-a-refreshing-surprise}}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.1\textwidth,height=\textheight]{qrplot.png}
+\caption{Surprise!}
+\end{figure}
+
+\newpage
+
+\hypertarget{bibliography}{%
+\section{Bibliography}\label{bibliography}}
+
+\hypertarget{refs}{}
+\leavevmode\hypertarget{ref-pearson_spearman_comparison}{}%
+``A Comparison of the Pearson and Spearman Correlation Methods.'' 2019.
+\emph{Minitab Express}.
+\href{https://support.minitab.com/en-us/minitab-express/1/help-and-how-to/modeling-statistics/regression\%20\%20\%20\%20\%20\%20\%20/supporting-topics/basics/a-comparison-of-the-pearson-and-spearman-correlation-methods/}{https://support.minitab.com/en-us/minitab-express/1/help-and-how-to/modeling-statistics/regression       /supporting-topics/basics/a-comparison-of-the-pearson-and-spearman-correlation-methods/}.
+
+\leavevmode\hypertarget{ref-gif_2015}{}%
+``Giphy.'' 2015. giphy.com.
+\url{https://media.giphy.com/media/11sBLVxNs7v6WA/giphy.gif}.
+
+\leavevmode\hypertarget{ref-kenton_2021}{}%
+Kenton, Will. 2021. ``What Is the Pearson Coefficient?''
+\emph{Investopedia}. Investopedia.
+\url{https://www.investopedia.com/terms/p/pearsoncoefficient.asp}.
+
+\leavevmode\hypertarget{ref-spearman_guide}{}%
+``Spearman's Rank-Order Correlation.'' 2018. Lund Research Ldt.
+\href{https://statistics.laerd.com/statistical-guides/spearmans-rank-order-correlation-statistical-guide\%20\%20\%20\%20\%20\%20\%20\%20\%20.php}{https://statistics.laerd.com/statistical-guides/spearmans-rank-order-correlation-statistical-guide         .php}.
 
 \end{document}

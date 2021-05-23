@@ -1,18 +1,15 @@
 ---
-title: 'Statistics : Correlation coefficient '
+title: 'Comparing correlation coefficient methods with R : Is there really a relationship between Statistics and Timothee ?'
 author:
-- affiliation: University of Geneva
-  name: Thuy-My Ngo
-- affiliation: University of Geneva
-  name: Doriane Pfister
-- affiliation: University of Geneva
-  name: Léonie Lefebvre
+  - Thuy-My Ngo^[University of Geneva, ID 20-312-468]
+  - Doriane Pfister^[University of Geneva, ID 20-325-122]
+  - Léonie Lefebvre^[University of Geneva, ID 20-302-063]
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output:
-  word_document: default
   pdf_document:
     dev: cairo_pdf
     keep_tex: yes
+  word_document: default
   html_document:
     df_print: paged
 endnote: no
@@ -29,7 +26,11 @@ bibliography: biblio.bib
 sansitup: no
 biblio-style: apsr
 ---
-
+```{r libraries, echo=FALSE, results=FALSE, warning=FALSE, message=FALSE }
+require(kableExtra)
+require(tidyverse)
+require(qrcode)
+```
 
 ```{r functions, echo=FALSE}
 # Generate Bivariate Data with Nonlinear Relationship
@@ -56,25 +57,24 @@ cor_nonlinear <- function(muX, muY, sX, sY, angle){
 }
 
 ```
-
 # Introduction
-As an apogee of the introduction to statistics course and top off the final moments of being a first year undergraduate in International Relations, this project reflects all the knowledge acquired throughout the past few months of this introductory class. Beginning with no history in programming nor experience in writing a scientific report on Rmarkdown, we were able to learn and develop step by step, our insight on the ‘magic’ of Data Analytics. 
+As an apogee of the introduction to statistics course and our final moments of being a first year undergraduate in International Relations, this project reflects all the knowledge acquired throughout the past few months attending this introductory class. Beginning with no history in programming nor experience in writing a scientific report on Rmarkdown, we were able to learn and develop step by step, our insight on the ‘magic’ of Data Analytics. 
 
-We are grateful to have had the chance to receive a rather large glance at basic R commands and to put into practice the notions seen during the classes. Now, we are pleased to lead you through the outcome resulting from our small but still progressing abilities in statistics. 
+We are grateful to have had the chance to receive a rather large glance at basic R commands and to put into practice the notions seen during classe. Today, we are pleased to lead you through the outcome resulting from our small but still progressing abilities in statistics. 
 
 # Description of the task
-In question 1 of exercise 2, our topic is related to bias study, non linear relationship. We are asked to draw samples from a PDF for (X,Y), where (X, Y) have a nonlinear relationship, using the function gen_nonlinear. Using the parameters assigned to us as well as an angle parameter, we had to explain how the angle parameter visually affect the data by comparing two scatterplots, one when the data is generated with angle = 0, and the other when the data is generated with angle = -0.45. 
+In question 1 of exercise 2, our topic is related to bias study, nonlinear relationship. We are asked to draw samples from a PDF for (X,Y), where (X, Y) have a nonlinear relationship, using the function gen_nonlinear. Using the parameters assigned to us as well as an angle parameter, we had to explain how the angle parameter visually affect the data by comparing two scatterplots. The first generated with angle = 0, and the second generated with angle = -0.45. 
 
-In question 2 of the same exercise, we study the Confidence Interval Coverage. We are given the task to study the coverage of different confidence intervals (CIs) for Px,y, in the following data settings:
+In question 2 of the same exercise, we study the Confidence Interval Coverage. We are given the task to study the coverage of different confidence intervals (CIs) for Px,y, with the following data settings:
   1. the PDF of (X,Y) is a bivariate normal PDF
   2. the PDF of (X,Y) is a bivariate normal PDF, but the observed sample contains outliers
   3. the PDF of (X,Y) is a discrete PDF
   4. X and Y have a nonlinear relationship
 
-The types of confidence intervals used are the parametric bootstrap CI of level = 0.8 and the nonparametric bootstrap CI of level = 0.8. We used
+The types of confidence intervals used are the parametric bootstrap CI of level = 0.8 and the non-parametric bootstrap CI of level = 0.8.
 
 # Motivation
-We decided to take part in this scientific report as we wanted to apply the numerous theoretical theories seen in the course provided by Profesor Victoria-Feser. We also saw this project as an opportunity to meet new people and experience the workgroup process, as we can combine our knowledge and perspective on the matter while being able to discuss within a group. 
+We decided to take part in this scientific report as we wanted to apply the numerous theoretical theories seen in the course provided by Profesor Victoria-Feser. We also saw this project as an opportunity to meet new people and experience the workgroup process, as we combine our knowledge and perspectives on the matter, while being able to discuss them within a group. 
 
 # Analysis
 ```{r nonlinear_q1, echo=FALSE, fig.align = 'center', fig.show="hold", out.width="50%", fig.cap = 'Hammock, this is the population correlation with angle = 0'}
@@ -104,7 +104,6 @@ plot(df, main=paste("Population nonlinear correlation = ", round(rho, 3)))
 
 ```
 
-
 ```{r nonlinear_q2, echo=FALSE, fig.align = 'center', fig.show="hold", out.width="50%", fig.cap = 'Comet, this is the population correlation with angle = -0.45'}
 
 #Ex2 question 1 
@@ -132,53 +131,69 @@ plot(df, main=paste("Population nonlinear correlation = ", round(rho, 3)))
 
 ```
 
-
-
 Here we see the two scatterplots of when the data is generated with angle = 0 (Hammock), and when it is generated with angle = -0.45 (Comet) from the samples from a PDF of (X, Y), where (X,Y) have a nonlinear relationship. 
 
 Hammock describes a positive relationship between X and Y as the graph shows a convex parabola (x^2). As we generate the data with an angle parameter of -0.45, we see that there is a rotation to the left. Thus, we deduce that the angle does visually affect the data, in that it imposes a rotation. 
 
-Furthermore, when the angle moves from $-\pi$ to $+\pi$, we observe a complete rotation of the parabola. 
+Furthermore, when the angle moves from $-\pi$ to $+\pi$, we observed a complete rotation of the parabola. 
 
 # Results and discussion: description and interpretation of the results
 
-| | |  Normal PDF| with outliers| Discrete PDF|  Nonlinear PDF|
-|:---------------|:---------|-----------:|-----------:|-----------:|-----------:|
-|parametric boot |n = 33 | 0.771| 0.639| 0.776| 0.681|
-| |n = 110 | 0.783| 0.257| 0.776| 0.63|
-|non-parametric boot |n = 33 | 0.758| 0.758| 0.753| 0.725|
-| |n = 110 | 0.773| 0.431| 0.769| 0.723|
+```{r result_table, echo=FALSE, message=FALSE, warning=FALSE}
+restab <- data.frame( "Boot Type" = c( c(rep("Parametic", 2) ), c( rep("Non-Parametric", 2) ) ),
+                      "Sample Size" = c(33,110,33,110),
+                      "Normal PDF" = c(0.771, 0.783, 0.758, 0.773),
+                      "With outliers" = c(0.639,0.257,0.758,0.431),
+                      "Discrete" = c(0.776,0.776, 0.753,0.769),
+                      "Non Linear" = c(0.681,0.630, 0.725, 0.723),
+                      check.names = FALSE)
+restab %>%
+  kable() %>%
+  kable_paper( full_width = F) %>%
+  collapse_rows(columns = 1, valign = "top") %>%
+  column_spec(3, color = c("green", "green", "black", "black"),
+                 bold = c(FALSE, TRUE, FALSE, FALSE ) ) %>%
+  column_spec(4, color = c("black", "orange", "black", "orange") ) %>%
+  column_spec(6, color = c("blue", "blue", "red", "red") )
+```
 
-The parametric bootstrap, as it is implemented, assumes that the random variables are bivariate normal. 
+The following discussion will be based on the results displayed in the Table. The use of colors to refer to the data is employed for the reader's convenience.
 
-How does it affect its performance, in terms of coverage, in the different data settings? 
-We observe a decrease in the interval confidence when the parametric boot is performed on non parametric functions such as the discrete and nonlinear, as seen in the blue data 
+We observe a decrease in the interval confidence when the parametric boot is performed on a non-parametric functions like the discrete and nonlinear ones (blue). Furthermore, we expect the non-parametric bootstrap to perform better on a discrete PDF, as it is not a parametric function. 
 
-In what data setting do you expect the nonparametric bootstrap to perform better?
-We expect the nonparametric bootstrap to perform better on a discrete PDF, as it is not a parametric function. 
+We assumed, that the bivariate normal PDF worked the best at approaching the confidence interval. We can see that 0.783 (bold, green) is the closest to the 0.8, particularly when operating with the parametric boot type. 
 
-We assume from these obtained results, that the bivariate normal PDF worked the best at approaching the confidence interval. We can see that 0.783 is the closest to 0.8, particularly when operating with the parametric boot type. 
+We observe that the boot type parameter works the best when applied on a normal PDF (green data). As the boot type parameter is based on the mean and standard deviation, it is the most optimal approach to compute the normal PDF’s confidence interval as the latter contains these two parameters. As for the non-parametric boot, it is the most optimal when applied on a no parameter function like the nonlinear function. It is displayed by the red data, which shows a greater confidence interval than the blue data, computed with a parametric boot.
 
-We observe that the boot type parameter works the best when applied on a normal PDF, as displayed by the green data. As the boot type parameter is based on the mean and standard deviation, it is the most optimal approach to compute the normal PDF’s confidence interval as the latter contains these two parameters. As for the non-parametric boot, it is the most optimal when applied on a no parameter function like the nonlinear function. It is displayed by the red data, which shows a greater confidence interval than the blue data, computed with a parametric boot.
-
-Then with the outliers setting, we see that as the n is larger, the number of outliers increases, thus making the result further than the confidence interval. The most surprising part of the table, is that the difference between the outliers setting when n = 33 and when n = 110, using the parametric boot type is quite large compared to when the data is performed with the nonparametric boot type. 
+Then with the outliers setting, we see that as the n is larger, the number of outliers increases (orange), thus making the result further than the confidence interval. The most surprising part of the table, is that the difference between the outliers setting when n = 33 and when n = 110, using the parametric boot type is quite large compared to when the data is performed with the non-parametric boot type. 
 
 # Statistical methods used
-The Pearson method is used to calculate a correlation coefficient that describes the strength relationship between two variables, in our case X and Y, which ranges from 0 to 1. The closer the correlation coefficient is to 0, the more the variables are independent from each other. When equal to 1, the variables are equal to each other. 
-The Pearson method can be used on empirical observations in daily life. For instance, if we want to evaluate whether there is a positive or negative relationship between a student’s age and their level of income when working at Starbucks.
+The Pearson method is used to calculate a correlation coefficient that describes the strength relationship between two variables (@kenton_2021), in our case X and Y, which ranges from 0 to 1. The closer the correlation coefficient is to 0, the more the variables are independent from each other. When equal to 1, the variables are equal to each other. 
+The Pearson method can be used on empirical observations in daily life @pearson_spearman_comparison. For instance, if we wanted to evaluate whether there is a positive or negative relationship between a student’s age and their level of income when working at Starbucks.
 
-The Spearman rank correlation method is the nonparametric version of the Pearson correlation coefficient method (“Lund Research Ltd”, 2018). It is distinct in that the Spearman correlation coefficient is used to determine the strength of a monotonic relationship, which is a type of function that only increases or only decreases. 
+The Spearman rank correlation method is the non-parametric version of the Pearson correlation coefficient method @spearman_guide. It is distinct in that the Spearman correlation coefficient is used to determine the strength of a monotonic relationship, which is a type of function that only increases or only decreases. 
 In real life, we can imagine that the Spearman method would be used to see whether an Unige exam performance in Statistics is associated with the time students spent studying in the UniMail library.
 
 # Acquired skills during the term project
-By accomplishing this report, we had an opportunity to broaden the use of the R language by computing various aspects of the topics seen in class. Despite a short learning period time, we are now able to compute various functions on R and interpret codes. Furthermore, learning to code has opened new perspectives as well as revealed numerous ways of interpreting datasets. We will be able to apply these perspectives to diverse daily socio-political situations. For these reasons, the present report benefitted us greatly to acquire skills that will make our International Relations studies more valuable. 
+By accomplishing this report, we had an opportunity to broaden our understanding of the R language by computing various aspects of the topics seen in class. Despite a short learning period time, we are now able to compute various functions on R and interpret R codes. Furthermore, learning to code has opened new perspectives as well as revealed numerous ways of interpreting datasets. We will be able to apply these perspectives to diverse daily socio-political situations. For these reasons, the present report benefitted us greatly to acquire skills that will make our International Relations studies more valuable. 
 
 # Conclusion
-In conclusion, in the Nonlinear Relationship Study, we see that the angle parameter does affect the data by imposing a rotation, displacing the parabola. 
-As for the Confidence Interval Coverage Study, the Confidence Interval of type npboot and of type boot results in different outcomes depending on the setting and the sample size. Overall, most of the outcomes are close to the confidence interval with a level = 0.8, as one would expect.
+In conclusion, in the Nonlinear Relationship Study, we see that the angle parameter does affect the data by imposing a rotation, moving the parabola. 
+As for the Confidence Interval Coverage Study, the Confidence Interval of non-parametric boot type and of parametric boot type, results in different outcomes depending on the setting and the sample size. Overall, most of the outcomes are close to the confidence interval with the highest value at 0.783 (bold, green), as one would expect.
 
-<iframe src="https://giphy.com/embed/11sBLVxNs7v6WA" width="480" height="217" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/cheer-cheering-11sBLVxNs7v6WA">via GIPHY</a></p>
+![Us three celebrating the finished report @gif_2015](cheering_minions.png){width=40%} 
 
-### You can scan the QR code with you mobile phone for a refreshing surprise!
+### Use your mobile phone to scan the QR code below for a refreshing surprise!
+```{r qrcode, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+png("qrplot.png")
+qrcode_gen("https://youtu.be/BvWefB4NGGI")
+dev.off()
+```
+![Surprise!](qrplot.png){width=10%}
+
+\newpage
+# Bibliography
+
+<div id="refs"></div>
 
 
